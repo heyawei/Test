@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<template id="temp">
+    <div>
+        <h2>父组件 <mark>{{msg}}</mark></h2>
+        <children :n="msg"></children>
+    </div>
+</template>
+<script src="../dist/vue.js"></script>
+<script>
+    const Vm= new Vue({
+        el:'#app',
+        components:{
+            parent:{
+                template:'#temp',
+                data:function () {
+                    return {msg:'Hello'}
+                },
+                components:{
+                    children:{
+                        props:['n'],
+                        template:'<p @click="sync">子组件 <mark>{{b}}</mark></p>',
+                        data:function () {
+                            return {b:this.n}
+                        },
+                        methods:{
+                            sync:function () {
+                                this.b='vivian'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

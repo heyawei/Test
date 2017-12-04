@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!--<div id="app">
+    <h2 v-cloak>{{msg}}</h2>
+    <h3>{{total}}</h3>
+</div>-->
+<div id="app2">
+    <h2>商品单价: <input type="text" v-model="n"></h2>
+    <h2>商品数量:<input type="text" v-model="m"></h2>
+    <h2>总经额:<input type="text" v-model="total"></h2>
+</div>
+<div id="demo">
+    {{ fullName }}
+</div>
+<script src="../dist/vue.js"></script>
+<script>
+    /*const Vm=new Vue({
+        el:'#app',
+        data:{
+            msg:'Hello',
+            n:20,
+            m:30,
+        },
+        computed:{
+            total:function () {
+              return this.n*this.m
+            }
+        }
+    })*/
+    const Vm=new Vue({
+        el:'#app2',
+        data:{
+            n:0,
+            m:0,
+        },
+        computed:{
+            /*虽然这里放的是函数，但是可以把total当作变量来使用。total只是得到计算后的结果（get）*/
+            total:{
+              get:function () {
+                return  this.n*this.m
+              },
+              set:function (newValue){
+                 /* alert(newValue)*/
+                 this.n=Math.round(newValue/this.m)
+              }  
+            }
+        }
+    });
+
+   const Vm1= new Vue({
+       el: '#demo',
+       data: {
+           firstName: 'Foo',
+           lastName: 'Bar'
+       },
+       computed: {
+           fullName: {
+               // getter
+               get: function () {
+                   return this.firstName + ' ' + this.lastName
+               },
+               // setter
+               set: function (newValue) {
+                   var names = newValue.split(' ');
+                   this.firstName = names[0];
+                   this.lastName = names[names.length - 1];
+                   console.log(newValue)
+               }
+           }
+       }
+   })
+
+</script>
+</body>
+</html>

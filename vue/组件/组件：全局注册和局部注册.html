@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <Hello></Hello>
+    <parent></parent>
+</div>
+<div id="app1">
+    <didi-component></didi-component>
+</div>
+<div id="app2">
+  <parent></parent>
+</div>
+<template id="temp">
+    <div>
+        <p>我是父组件</p>
+        <children></children>
+    </div>
+</template>
+<script src="../dist/vue.js"></script>
+<script>
+    /*Vue.js的组件注册分为全局注册和局部注册。
+     全局注册使用Vue.component方法。第一个参数是组件名字，第二个参数是组件的构造函数，要么是function，要么是object。*/
+    //第二个参数传入object的情况
+    Vue.component("Hello",{
+        template:"<div style='font-size: 20px;color: red'>A custom component!</div>"
+    });
+    //第二个参数传入function的情况，它是一个组件构造器
+    var ENcomponent=Vue.extend({
+        template:"<div style='font-size: 20px;color: red'>A 2rd components</div>"
+    });
+    //注册
+    Vue.component("parent",ENcomponent);
+    //创建根实例
+    new Vue({
+        el:"#app"
+    });
+
+  /*局部注册，以vue实例选项components或者组件构造器即Vue.extend函数的components选项。*/
+    var Parent=Vue.extend({
+        template:`<p>这里是父组件的内容<child></child></p>`,
+        components:{
+            "child":{
+                template:"<h2>我是子组件的内容</h2>"
+            }
+        }
+    });
+    new Vue({
+        el:"#app1",
+        components:{
+            "didi-component":Parent
+        }
+    });
+
+    const Vm=new Vue({
+        el:'#app2',
+        components:{
+            parent:{
+                template:'#temp',
+                components:{
+                    children:{
+                        template:'<h2>我是子组件</h2>'
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

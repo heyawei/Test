@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+</div>
+<template id="temp">
+    <div>
+        <h2>{{msg}}父组件:{{name}}</h2>
+        <children @s="getName" :n="msg"></children>
+    </div>
+</template>
+<script src="../dist/vue.js"></script>
+<script>
+    const Vm = new Vue({
+        components: {
+            parent: {
+                template: '#temp',
+                data: function () {
+                    return {msg: 'hello', name: '糖糖'}
+                },
+                methods: {
+                    getName: function (data) {
+                        this.name = data/*接收子组件传过来的的数据，同时更改父组件的数据*/
+                    }
+                },
+                components: {
+                    children: {
+                        props: ['n'],
+                        template: '<p @click="setName">{{n}}子组件{{name}}</p>',
+                        data:function () {
+                            return {name: 'vivian'}
+                        },
+                        methods: {
+                           setName: function () {
+                                this.$emit('s', this.name)/*发射子组件的数据*/
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }).$mount('#app');
+</script>
+</body>
+</html>

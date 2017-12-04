@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="comp='temp1'">显示组件1</button>
+    <button @click="comp='temp2'">显示组件2</button>
+    <component :is="comp"></component>
+</div>
+<script src="../dist/vue.js"></script>
+<script>
+    const Vm = new Vue({
+        el: '#app',
+        data: {
+            comp: 'temp1'
+        },
+        components: {
+            temp1: {
+                template: '<h2>组件1</h2>'
+            },
+            temp2: {
+                template: '<h2>组件2</h2>'
+            }
+        }
+    })
+</script>
+</body>
+</html>

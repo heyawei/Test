@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+</head>
+<body>
+<div id="app">
+    {{msg}}
+</div>
+<script src="../dist/vue.js"></script>
+<script>
+    const Vm =new Vue({
+        el:'#app',
+        data:{
+            msg:'Hello'
+        },
+        beforeCreate:function () {
+            alert(beforeCreate)
+        },
+        created:function () {
+            alert(created)
+        }, beforeMount:function () {
+            alert(beforeMount)
+        }, mounted:function () {
+            alert(mounted)
+        }, beforeUpdate:function () {
+            alert(beforeUpdate)
+        }, updated:function () {
+            alert(updated)
+        },
+        beforeDestroy:function () {
+            alert(beforeDestroy)
+        },
+        destroyed:function () {
+            alert(destroyed)
+        }
+    });
+ /* app.$destroy()/!*手动销毁*!/*/
+</script>
+</body>
+</html>

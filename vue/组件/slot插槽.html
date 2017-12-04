@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<div id="app">
+    <hello>你好吗！啦啦啦啦</hello>
+</div>
+<template id="temp">
+    &lt;!&ndash;无名插槽&ndash;&gt;
+    <h1>hello! <slot></slot></h1>
+</template>-->
+<div id="app1">
+    <!--有名插槽-->
+    <hello>
+        你好吗！啦啦啦啦
+        <div slot="div1">111111</div>
+        <div slot="div2">222222</div>
+    </hello>
+</div>
+<template id="temp1">
+    <h1>hello!<slot></slot><slot name="div2"></slot><slot name="div1"></slot></h1>
+</template>
+<script src="../dist/vue.js"></script>
+<script>
+    const Vm=new Vue({
+        el:'#app1',
+        components:{
+            hello:{
+                template:'#temp1'
+            }
+        }
+    })
+</script>
+</body>
+</html>
